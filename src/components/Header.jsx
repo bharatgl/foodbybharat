@@ -42,7 +42,7 @@ const Header = () => {
     });
   };
   return (
-    <header className="z-50 w-screen  p-4 px-4 md:p-6 md:px-16">
+    <header className=" z-50 w-screen p-4 Wpx-6 md:p-6 md:px-16 bg-primary">
       {/* desktop and tablet  */}
 
       <div className="hidden md:flex w-full h-full items-center justify-between">
