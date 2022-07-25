@@ -12,7 +12,7 @@ const CreateContainer = () => {
   const [isLoading, setisLoading] = useState("false");
 
   return (
-    <div className="z-0 w-full h-[100%] min-h-screen flex items-center justify-center">
+    <div className=" w-full h-[100%] flex items-center justify-center">
       <div className="w-[50%] md:w-[75%] border border-gray-300 rounded-lg p-4 flex flex-col items-center justify-center">
         {fields && (
           <p
