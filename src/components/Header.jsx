@@ -15,7 +15,7 @@ const Header = () => {
   const [{ user }, dispatch] = useStateValue();
 
   const [isMenu, setisMenu] = useState(false);
-
+  // console.log(user);
   const login = async () => {
     if (!user) {
       const {
@@ -31,7 +31,8 @@ const Header = () => {
       setisMenu(!isMenu);
     }
   };
-
+  let newUser = localStorage.getItem("user");
+  console.log(newUser);
   const logout = () => {
     setisMenu(false);
     localStorage.clear();
@@ -146,6 +147,7 @@ const Header = () => {
           <motion.img
             whileTap={{ scale: 0.6 }}
             src={user ? user.photoURL : Avatar}
+            // src={user.photoURL}
             className=" w-10 min-w-[40-px] h-10 min-h-[40px] drop-shadow-xl cursor-pointer rounded-full"
             alt="userprofile"
             onClick={login}
