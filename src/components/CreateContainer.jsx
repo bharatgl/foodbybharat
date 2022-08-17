@@ -14,9 +14,11 @@ import {
 } from "react-icons/md";
 import { storage } from "../firebase.config";
 import { categories } from "../utils/data";
-import { saveItem } from "../utils/firebaseFunctions";
+import { getAllFoodItems, saveItem } from "../utils/firebaseFunctions";
 import Loader from "./Loader";
 import { AnimatePresence, motion } from "framer-motion";
+import { useStateValue } from "../context/StateProvider";
+import { actionType } from "../context/reducer";
 
 const CreateItem = () => {
   const [title, setTitle] = useState("");
@@ -28,6 +30,7 @@ const CreateItem = () => {
   const [msg, setMsg] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [imageAsset, setImageAsset] = useState(null);
+  const [{ foodItems }, dispatch] = useStateValue();
 
   const uploadImage = (e) => {
     setIsLoading(true);
@@ -127,6 +130,12 @@ const CreateItem = () => {
       }
     } catch (error) {
       console.log(error);
+      setFields(true);
+      setMsg("Error while uploading : Try Again ");
+      setAlertStatus("success");
+      setTimeout(() => {
+        setFields(false);
+      }, 4000);
     }
   };
 
@@ -136,6 +145,15 @@ const CreateItem = () => {
     setCalories("");
     setPrice("");
     setCalories("Select Category");
+  };
+
+  const fetchData = async () => {
+    await getAllFoodItems().then((data) => {
+      dispatch({
+        type: actionType.SET_FOOD_ITEMS,
+        foodItems: data,
+      });
+    });
   };
 
   return (
